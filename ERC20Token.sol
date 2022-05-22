@@ -52,6 +52,13 @@ contract ERC20 is IERC20{
         return _allowances[owner][spender];
     }
 
+    /**
+    * Before changing the value of the allowance, it's better to set it to 0 first if it wasn't and then
+    * changing it to the desired amount, to prevent allowance vector attack, which consists of the spender
+    * transfering the old allowance to his wallet while the owner is updating the amount of the allowance,
+    * which leads to the spender being able to transfer to his wallet the first amount and then the second
+    * just because of the mining order of the transactions.
+    */
     function approve(address spender, uint256 amount) external override returns (bool) {
         require(allowance(msg.sender, spender) == 0, "You have to set the allowance to 0 first before changing it");
         _approve(msg.sender, spender, amount);
