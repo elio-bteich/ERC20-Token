@@ -1,3 +1,1 @@
-# solidity projects
-
-These are all my solidity smart contracts
+# This is my first ERC20 Token
